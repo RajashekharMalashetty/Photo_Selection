@@ -2,38 +2,45 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
+const session = require("express-session");
+
+const authRoutes = require("./routes/auth");
+const adminRoutes = require("./routes/admin");
 
 dotenv.config();
 
 const app = express();
 
 
-// ===============================
 // Middleware
-// ===============================
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-// ===============================
-// Static Files
-// ===============================
+// Session
+
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false
+    })
+);
+
+
+// Static files
 
 app.use(express.static(path.join(__dirname, "public")));
 
 
-// ===============================
-// EJS Setup
-// ===============================
+// EJS
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 
-// ===============================
-// MongoDB Connection
-// ===============================
+// MongoDB
 
 mongoose
     .connect(process.env.MONGO_URI)
@@ -45,18 +52,17 @@ mongoose
     });
 
 
-// ===============================
-// Home Route
-// ===============================
+// Routes
 
 app.get("/", (req, res) => {
     res.render("home");
 });
 
+app.use(authRoutes);
+app.use(adminRoutes);
 
-// ===============================
+
 // Server
-// ===============================
 
 const PORT = process.env.PORT || 3000;
 

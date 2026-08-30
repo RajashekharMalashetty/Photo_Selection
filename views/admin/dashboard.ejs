@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <div class="admin-header">
+
+            <div>
+                <h1>📸 Admin Dashboard</h1>
+
+                <p>
+                    Manage your photography clients
+                </p>
+            </div>
+
+            <a
+                href="/admin/logout"
+                class="logout-btn"
+            >
+                Logout
+            </a>
+
+        </div>
+
+
+        <div class="dashboard-actions">
+
+            <a
+                href="/admin/clients/new"
+                class="primary-btn"
+            >
+                + Add New Client
+            </a>
+
+        </div>
+
+
+        <div class="clients-section">
+
+            <h2>Clients</h2>
+
+
+            <% if (clients.length === 0) { %>
+
+                <div class="empty-state">
+
+                    <h3>No clients yet</h3>
+
+                    <p>
+                        Add your first photography client.
+                    </p>
+
+                </div>
+
+            <% } else { %>
+
+
+                <div class="client-grid">
+
+                    <% clients.forEach(client => { %>
+
+                        <div class="client-card">
+
+                            <h3>
+                                <%= client.name %>
+                            </h3>
+
+                            <p>
+                                📧 <%= client.email %>
+                            </p>
+
+                            <p>
+                                📱 <%= client.phone || "Not provided" %>
+                            </p>
+
+                            <p>
+                                📷 <%= client.projectName %>
+                            </p>
+
+                        </div>
+
+                    <% }) %>
+
+                </div>
+
+
+            <% } %>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
