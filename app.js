@@ -6,6 +6,7 @@ const session = require("express-session");
 
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
+const clientRoutes = require("./routes/client");
 
 dotenv.config();
 
@@ -60,7 +61,7 @@ app.get("/", (req, res) => {
 
 app.use(authRoutes);
 app.use(adminRoutes);
-
+app.use(clientRoutes);
 
 // Server
 

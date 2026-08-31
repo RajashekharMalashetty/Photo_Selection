@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        <%= gallery.title %>
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div class="client-gallery">
+
+        <div class="gallery-header">
+
+            <p class="gallery-label">
+                PHOTOGRAPHY GALLERY
+            </p>
+
+            <h1>
+                <%= gallery.title %>
+            </h1>
+
+            <p>
+                Hello <%= gallery.client.name %> 👋
+            </p>
+
+            <% if (gallery.description) { %>
+
+                <p class="gallery-description">
+                    <%= gallery.description %>
+                </p>
+
+            <% } %>
+
+        </div>
+
+
+        <% if (photos.length === 0) { %>
+
+            <div class="empty-state">
+
+                <h2>
+                    Photos are not available yet.
+                </h2>
+
+                <p>
+                    Please check again later.
+                </p>
+
+            </div>
+
+        <% } else { %>
+
+
+            <div class="client-photo-grid">
+
+                <% photos.forEach(photo => { %>
+
+                    <div class="client-photo-card">
+
+                        <img
+                            src="<%= photo.imageUrl %>"
+                            alt="Photography"
+                        >
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+
+        <% } %>
+
+    </div>
+
+</body>
+
+</html>

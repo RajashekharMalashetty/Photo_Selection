@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Gallery</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h1>📸 Create Gallery</h1>
+
+        <p>
+            Client:
+            <strong>
+                <%= client.name %>
+            </strong>
+        </p>
+
+
+        <form
+            action="/admin/clients/<%= client._id %>/gallery"
+            method="POST"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Gallery Title
+                </label>
+
+                <input
+                    type="text"
+                    name="title"
+                    placeholder="Example: Wedding Photos"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    name="description"
+                    placeholder="Gallery description"
+                    rows="5"
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-btn"
+            >
+                Create Gallery
+            </button>
+
+
+            <a
+                href="/admin"
+                class="back-link"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

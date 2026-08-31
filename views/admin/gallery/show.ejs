@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        <%= gallery.title %>
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <a
+            href="/admin"
+            class="back-link"
+        >
+            ← Dashboard
+        </a>
+
+
+        <h1>
+            📸 <%= gallery.title %>
+        </h1>
+
+
+        <p>
+            Client:
+            <strong>
+                <%= gallery.client.name %>
+            </strong>
+        </p>
+
+        <div class="private-link-box">
+
+    <h3>
+        🔐 Client Private Gallery
+    </h3>
+
+    <input
+        type="text"
+        id="galleryLink"
+        value="<%= `${req.protocol}://${req.get('host')}/gallery/${gallery.accessToken}` %>"
+        readonly
+    >
+
+    <button
+        type="button"
+        class="primary-btn"
+        onclick="copyGalleryLink()"
+    >
+        Copy Link
+    </button>
+
+</div>
+
+
+        <hr>
+
+
+        <h2>
+            Upload Photos
+        </h2>
+
+
+        <form
+            action="/admin/galleries/<%= gallery._id %>/photos"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Select Photos
+                </label>
+
+                <input
+                    type="file"
+                    name="photos"
+                    accept="image/jpeg,image/png,image/webp"
+                    multiple
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-btn"
+            >
+                Upload Photos
+            </button>
+
+        </form>
+
+
+        <hr>
+
+
+        <h2>
+            Gallery Photos
+        </h2>
+
+
+        <% if (photos.length === 0) { %>
+
+            <p>
+                No photos uploaded yet.
+            </p>
+
+        <% } else { %>
+
+            <div class="photo-grid">
+
+                <% photos.forEach(photo => { %>
+
+                    <div class="photo-card">
+
+                        <img
+                            src="<%= photo.imageUrl %>"
+                            alt="<%= photo.filename %>"
+                        >
+
+                        <p>
+                            <%= photo.filename %>
+                        </p>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+        <% } %>
+
+    </div>
+<script src="/js/gallery.js"></script>
+</body>
+
+</html>
